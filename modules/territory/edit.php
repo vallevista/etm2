@@ -12,7 +12,7 @@ $data = (new DataOut)
 ?>
 <form
     v-module
-    action="territory/editService"
+    action="territory/edit_service"
     data-done="territory?number={{ territory.number }}"
     class="create container"
     data="<?php echo $data?>">
