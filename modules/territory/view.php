@@ -52,7 +52,7 @@ $data = (new DataOut)
     <form
         id="check-in"
         v-module
-        action="territory/checkinService?number={{ territory.number }}"
+        action="territory/checkin_service?number={{ territory.number }}"
         data-done="territory/view?number={{ territory.number }}">
       <button
           type="submit"
@@ -89,7 +89,7 @@ $data = (new DataOut)
   </div>
   <form
       v-module
-      action="territory/checkoutService?number={{ territory.number }}&publisherName={{ publisherName }}"
+      action="territory/checkout_service?number={{ territory.number }}&publisherName={{ publisherName }}"
       data-done="territory/view?number={{ territory.number }}"
       v-show="showPublisherLookup">
     <input
