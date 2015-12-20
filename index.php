@@ -11,6 +11,8 @@
 	<link href="vendor/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet">
 
 	<link href="src/style/default.css" rel="stylesheet">
+	<link rel="stylesheet" href="vendor/leaflet-dist/leaflet.css">
+	<link href="vendor/leaflet.labelOverlay/leaflet.labelOverlay.css" rel="stylesheet">
 
 	<title></title>
 </head>
@@ -32,6 +34,7 @@
 <script src="vendor/vue/dist/vue.js"></script>
 <script src="vendor/class/Class.js"></script>
 <script src="vendor/moment/min/moment-with-locales.min.js"></script>
+<script src="vendor/leaflet-dist/leaflet-src.js"></script>
 <script>
 	moment.locale('en');
 </script>
@@ -44,4 +47,6 @@
 <script src="src/client/Enpowi/utilities.js"></script>
 <script src="modules?module=app&component=session.js"></script>
 <script src="modules/app/app.js"></script>
+<script src="vendor/poly2tri/dist/poly2tri.min.js"></script>
+<script src="vendor/leaflet.labelOverlay/leaflet.labelOverlay.js"></script>
 </html>

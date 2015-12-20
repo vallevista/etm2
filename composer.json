@@ -110,7 +110,8 @@
     },
     "autoload": {
         "psr-0": {
-            "Enpowi\\": "./src/server/"
+            "Enpowi\\": "./src/server/",
+            "ETM\\": "./src/server/"
         }
     },
     "require-dev": {
