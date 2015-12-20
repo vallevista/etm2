@@ -26,7 +26,9 @@
     "galereya": "https://github.com/VodkaBears/galereya.git#~0.9.94",
     "bootstrap-datepicker": "~1.4.0",
     "moment": "~2.10.3",
-    "bs-typeahead": "~0.0.5"
+    "bs-typeahead": "~0.0.5",
+    "leaflet-draw": "~0.2.4",
+    "leaflet.labelOverlay": "leaflet.labeloverlay#*"
   },
   "resolutions": {
     "vue": "~0.11.5"
