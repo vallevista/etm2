@@ -8,20 +8,30 @@ $data = (new DataOut)
     ->add('territory', (new \ETM\Territory(App::param('number')))->bindGeoJson())
     ->out();
 ?>
-<div class="container" data="<?php echo $data?>">
+<div id="card" class="container" data="<?php echo $data?>">
   <title>Territory {{ territory.number }}</title>
   <style>
+    #card {
+      margin-left: auto;
+      margin-right: auto;
+    }
     #map {
-      min-height: 400px;
+      height: 600px;
+      width: 1000px;
     }
     #mapMini {
-      min-height: 200px;
+      height: 375px;
     }
     #card {
-      width: 100%;
+      width: 1000px;
     }
     #cardLabel {
       position: absolute;
+      top: 160px;
+      width: 0px;
+    }
+    #cardLabel th {
+      font-size: 30px;
     }
     #cardLabel .top {
       cursor: pointer;
@@ -36,9 +46,10 @@ $data = (new DataOut)
       font-weight: bold;
     }
     #directions h3 {
-      margin: 0px;
-      padding: 0px;
+      margin: 0;
+      padding: 0;
       width: 100%;
+      font-size: 20px;
     }
     #directions ul {
       padding-left: 7px;
@@ -47,35 +58,51 @@ $data = (new DataOut)
       color: red;
       line-height: auto;
     }
+    #doNotCallTable {
+      width: 100%;
+    }
+    #doNotCallTable th {
+      font-size: 10px;
+    }
+    #north {
+      position: absolute;
+      z-index: 900;
+      top: 800px;
+    }
   </style>
-  <!--img id="card" src="assets/card.png" />
   <table id="cardLabel" border="0">
+    <colgroup>
+      <col style="width: 175px;">
+      <col style="width: 540px;">
+      <col style="width: 20px;">
+      <col style="width: 10px;">
+      <col style="width: 30px;">
+      <col style="width: 190px;">
+    </colgroup>
     <tr class="top">
-      <td style="width: 3%;"></td>
-      <td style="width: 10%;"></td>
-      <td style="width: 35%; max-width:35%;">
-        <span style="position: absolute; max-width: 12em; top: 0.23em; line-height: 0.9em;">{{ territory.locality }}</span>
-      </td>
-      <td style="width: 1%;"></td>
-      <td style="width: 10%;"></td>
-      <td style="width: 12%;">{{ territory.number }}</td>
-      <td style="width: 1%;"></td>
+      <td></td>
+      <th>{{ territory.locality }}</th>
+      <td></td>
+      <td></td>
+      <td></td>
+      <th>{{ territory.number }}</th>
     </tr>
     <tr>
-      <td colspan="3" style="text-align: center;padding-left: 1%; vertical-align: top;">
+      <td colspan="2" style="text-align: center;padding-left: 1%; vertical-align: top;">
+        <div id="mapMini"></div>
         <div id="aerial-map-note">
           (aerial map, larger map on back)
         </div>
       </td>
       <td></td>
-      <td id="directions" colspan="2">
-        <h3>Directions</h3>
+      <td id="directions" colspan="3">
+        <h3 v-t>Directions</h3>
         <ul>
           <li>Work <span style="font-weight: bold;">houses, apartments, and businesses</span> that are encompassed within the <span style="color: #50B414;">green highlighted area</span>.</li>
           <li>Keep track of do not calls on front.</li>
         </ul>
         <h3>Do Not Calls</h3>
-        <table style="width: 100%;" border="1">
+        <table id="doNotCallTable" border="1">
           <tr>
             <th>Name</th>
             <th>Address</th>
@@ -124,9 +151,9 @@ $data = (new DataOut)
       </td>
     </tr>
   </table>
-  <br style="line-height: 4px;" />
-  <img id="north" src="assets/n.png" /-->
-  <div id="mapMini"></div>
+  <img id="card" src="assets/card.png" />
+  <hr style="line-height: 4px;" />
+  <img id="north" src="assets/n.png" />
   <div id="map"></div>
 </div>
 
@@ -139,15 +166,6 @@ $data = (new DataOut)
         mapMiniElement = app.getElementById('mapMini'),
         map = L.map(mapElement),
         mapMini = L.map(mapMiniElement),
-        $aerialMapNote =  $(app.getElementById('aerial-map-note')),
-        $mapElement = $(mapElement),
-        $mapMiniElement = $(mapMiniElement),
-        $north = $(app.getElementById('north')),
-        $card = $(app.getElementById('card')),
-        $cardLabel = $(app.getElementById('cardLabel')),
-        $directions = $(app.getElementById('directions')),
-        height,
-        width,
         options = {
           style: {
             color: '#50B414',
@@ -157,14 +175,6 @@ $data = (new DataOut)
         },
         mapGeoJson = L.geoJson(geoJson, options).addTo(map),
         mapMiniGeoJson = L.geoJson(geoJson, options).addTo(mapMini);
-
-    map.fitBounds(mapGeoJson.getBounds());
-
-    mapMini
-        .fitBounds(mapMiniGeoJson.getBounds())
-        .zoomOut()
-        .zoomOut()
-        .zoomOut();
 
     L.tileLayer('http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
       maxZoom: 18,
@@ -176,16 +186,12 @@ $data = (new DataOut)
       attribution: '&nbsp;'
     }).addTo(mapMini);
 
-    //provideDirections(map.getCenter());
+    map.fitBounds(mapGeoJson.getBounds());
 
-    function onPopupClose(evt) {
-      select.unselectAll();
-    }
-
-    function provideDirections(latLng) {
-      $cardLabel.find('.top').click(function() {
-        window.open('https://maps.google.com/maps?q=' + latLng.lat + ',' + latLng.lng);
-      });
-    }
+    mapMini
+        .fitBounds(mapMiniGeoJson.getBounds())
+        .zoomOut()
+        .zoomOut()
+        .zoomOut();
   });
 </script>
