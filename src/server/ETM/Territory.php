@@ -23,7 +23,7 @@ class Territory
   public $workedInYear;
   public $due;
   public static $secondsInMonth = 2592000;
-  public static $secondsInYear = 60*60*24*365;
+  public static $secondsInYear;
   public $idealReturnDate;
 
   public static $statusIn = 'in';
@@ -34,6 +34,9 @@ class Territory
 
   public function __construct($number, $bean = null) {
     if (self::$lastYear === null) {
+      if (self::$secondsInYear === null) {
+        self::$secondsInYear = 60*60*24*365;
+      }
       self::$lastYear = time() - self::$secondsInYear;
     }
 
