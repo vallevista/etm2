@@ -208,6 +208,7 @@ class Territory
   }
 
   public function bindGeoJson() {
+    if ($this->_bean === null) return $this;
     $this->geoJson = $this->_bean->geoJson;
     return $this;
   }
