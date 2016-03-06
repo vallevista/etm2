@@ -1,1 +1,4 @@
 /vendor/
+.idea/copyright/profiles_settings.xml
+*.xml
+.idea/etm2.iml
