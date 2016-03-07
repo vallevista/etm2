@@ -43,15 +43,18 @@ $data = (new DataOut)
 <script src="vendor/leaflet-draw/dist/leaflet.draw.js"></script>
 <script>
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(loadMap);
+    navigator.geolocation.getCurrentPosition(function(position) {
+      loadMap([position.coords.latitude, position.coords.longitude]);
+    });
   } else {
     loadMap();
   }
 
-  function loadMap(position) {
+  function loadMap(coordinates) {
     var data = datas[0],
         territory = data.territory,
-        geoJson = JSON.parse(territory.geoJson),
+        hasGeo = territory.geoJson ? true : false,
+        geoJson = hasGeo ? JSON.parse(territory.geoJson) : null,
         mapElement = app.getElementById('map'),
         map = L.map(mapElement),
         drawnItems = new L.FeatureGroup(),
@@ -72,9 +75,10 @@ $data = (new DataOut)
             });
           }
         },
-        mapGeoJson = L.geoJson(geoJson, options);
+        mapGeoJson = hasGeo ? L.geoJson(geoJson, options) : null;
 
-    map.fitBounds(mapGeoJson.getBounds());
+    console.log(coordinates);
+    map.fitBounds(mapGeoJson ? mapGeoJson.getBounds() : L.latLng(coordinates[1], coordinates[0]));
     drawnItems.addLayer(mapGeoJson);
     map.addControl(drawControl);
     map.addLayer(drawnItems);
