@@ -113,5 +113,8 @@
             "Enpowi\\": "./src/server/",
             "ETM\\": "./src/server/"
         }
+    },
+    "require-dev": {
+        "bafs/testify": "dev-master"
     }
 }
