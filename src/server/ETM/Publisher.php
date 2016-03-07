@@ -126,4 +126,29 @@ class Publisher
 
   public static function withoutRecords() {
   }
+
+  public static function merge($name, Array $names) {
+    $index = array_search($name, $names);
+    if ($index > -1) {
+      array_slice($names, $index, 1);
+    }
+
+    $into = (new self($name))->bean();
+    $trash = [];
+    $records = $into->ownRecordList ?: [];
+
+    foreach($names as $_name) {
+      $trash[] =
+      $publisherBean = (new Publisher($_name))->bean();
+      foreach($publisherBean->ownRecordList as $bean) {
+        $records[] = $bean();
+      }
+      $publisherBean->ownRecordList = [];
+    }
+
+    $into->ownRecordList = $records;
+
+    R::trashAll($trash);
+    return R::store($into);
+  }
 }

@@ -208,12 +208,13 @@ class Territory
   }
 
   public function bindGeoJson() {
-    if ($this->_bean === null) return $this;
+    if (!$this->exists()) return $this;
     $this->geoJson = $this->_bean->geoJson;
     return $this;
   }
 
   public function bindRecords() {
+    if (!$this->exists()) return $this;
     $records = [];
     foreach($this->_bean->sharedRecordList as $recordBean) {
       $records[] = (new Record($recordBean->number, $recordBean))->bindPublisher();

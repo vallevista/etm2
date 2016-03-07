@@ -94,4 +94,19 @@ class Record
 
     return $records;
   }
+
+  public static function historyComplete() {
+    $recordBeans = R::findAll('record', ' order by `out` ');
+    $records = [];
+
+    foreach ($recordBeans as $bean) {
+      $records[] = (new Record($bean->number, $bean))->bindPublisher();
+    }
+
+    return $records;
+  }
+
+  public function bean() {
+    return $this->_bean;
+  }
 }
