@@ -14,7 +14,7 @@ class Publisher
   public $city;
   public $state;
   public $zip;
-  public $records;
+  public $records = [];
 
   private $_bean;
 
@@ -37,7 +37,7 @@ class Publisher
   public static function fromName($name) {
     $publisher = new self($name);
     if ($publisher->_bean === null) {
-      $publisher->replace();
+      $publisher->save();
     }
 
     return $publisher;
@@ -78,7 +78,7 @@ class Publisher
     return $this;
   }
 
-  public function replace() {
+  public function save() {
     $bean = $this->_bean ?: R::dispense('publisher');
 
     $bean->name = $this->name;
@@ -141,7 +141,7 @@ class Publisher
       $trash[] =
       $publisherBean = (new Publisher($_name))->bean();
       foreach($publisherBean->ownRecordList as $bean) {
-        $records[] = $bean();
+        $records[] = $bean;
       }
       $publisherBean->ownRecordList = [];
     }
