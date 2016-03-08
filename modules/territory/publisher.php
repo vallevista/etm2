@@ -12,7 +12,7 @@ $data = (new DataOut)
     data="<?php echo $data?>"
     class="container">
   <h3><span v-t>Territory History for: </span>{{ publisher.name }}</h3>
-  <table class="wide">
+  <table class="table wide">
     <thead>
     <tr>
       <th v-t>Territory</th>

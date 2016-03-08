@@ -110,7 +110,7 @@ $data = (new DataOut)
   </form>
   <hr>
   <h4 v-t>History</h4>
-  <table class="history">
+  <table class="table history">
     <thead>
     <tr>
       <th v-t>Publisher</th>

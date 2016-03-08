@@ -19,7 +19,7 @@ $data = (new DataOut)
       <th v-t>Number</th>
       <th v-t>Locality</th>
       <th v-t>Status</th>
-      <th v-t>Publisher</th>
+      <th v-t>Latest Publisher</th>
       <th v-t>Last Worked</th>
     </tr>
     </thead>
@@ -33,10 +33,8 @@ $data = (new DataOut)
       <td>{{ territory.locality }}</td>
       <td>{{ territory.status }}</td>
       <td>
-        <span v-show="territory.status === 'in'">
-          <a href="#/territory/publisher?name={{ territory.record.publisher.name }}">
-            {{ territory.record.publisher.name }}<a/>
-        </span>
+        <a href="#/territory/publisher?name={{ territory.record.publisher.name }}">
+          {{ territory.record.publisher.name }}<a/>
       </td>
       <td>
         <span v-show="territory.status === 'in'">

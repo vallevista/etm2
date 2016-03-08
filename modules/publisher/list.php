@@ -33,7 +33,7 @@ $data = (new DataOut)
             value="{{ publisher.name }}"
             v-show=" action === 'merge' ">
       </td>
-      <td>{{ publisher.name }}</td>
+      <td><a href="#/publisher/view?name={{ publisher.name }}">{{ publisher.name }}</a></td>
       <td><a href="#/territory/publisher?name={{ publisher.name }}">Territory History</a></td>
     </tr>
     <tr>

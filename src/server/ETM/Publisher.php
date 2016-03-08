@@ -130,16 +130,24 @@ class Publisher
   public static function merge($name, Array $names) {
     $index = array_search($name, $names);
     if ($index > -1) {
-      array_slice($names, $index, 1);
+       array_splice($names, $index, 1);
     }
 
     $into = (new self($name))->bean();
     $trash = [];
     $records = $into->ownRecordList ?: [];
 
+    if ($into === null) {
+      throw new \Exception('merge into publisher does not exist');
+    }
+
     foreach($names as $_name) {
       $trash[] =
       $publisherBean = (new Publisher($_name))->bean();
+
+      if ($publisherBean === null) {
+        throw new \Exception('merge from publisher does not exist');
+      }
       foreach($publisherBean->ownRecordList as $bean) {
         $records[] = $bean;
       }

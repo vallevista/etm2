@@ -73,7 +73,8 @@ class Territory
   }
 
   public function updateDynamics() {
-    $latest = Record::latest($this->number)->bindPublisher();
+    $latest = Record::latest($this->number)
+        ->bindPublisher();
     if ($latest === null) return $this;
 
     if ($latest->in === null) {

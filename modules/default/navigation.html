@@ -14,7 +14,7 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li class="dropdown">
+				<li class="dropdown" v-show=" hasPerm('terrtory') ">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span v-t>Territory</span>  <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="#/territory/priority" v-t>Priority</a></li>
@@ -22,6 +22,12 @@
 						<li><a href="#/territory/congregation" v-t>Congregation Map</a></li>
 						<li><a href="#/territory/book" v-t>Book</a></li>
 						<li><a href="#/territory/list" v-t>List</a></li>
+					</ul>
+				</li>
+				<li class="dropdown" v-show=" hasPerm('publisher') ">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span v-t>Publishers</span>  <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#/publisher/list" v-t>List</a></li>
 					</ul>
 				</li>
 				<li class="dropdown" v-show=" hasPerm('*', '*') ">
@@ -33,7 +39,7 @@
 					</ul>
 				</li>
 			</ul>
-			<form class="navbar-form navbar-left" role="search">
+			<form class="navbar-form navbar-left" role="search" v-show="hasPerm('terrtory') || hasPerm('publisher')">
 				<div class="form-group">
 					<input type="text" class="form-control" v-placeholder="Search">
 				</div>

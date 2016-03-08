@@ -7,11 +7,9 @@ Module::is();
 $workPriority = ETM\Territory::workPriority();
 $territoriesNotWorkedInYear = 0;
 foreach($workPriority as $territory) {
-  if (!$territory->workedInYear) {
-    $territoriesNotWorkedInYear++;
-  }
+  if ($territory->workedInYear === false) continue;
+  $territoriesNotWorkedInYear++;
 }
-
 
 $data = (new DataOut)
     ->add('territories', $workPriority)
