@@ -68,6 +68,8 @@ class Record
 
     R::storeAll([$bean, $territoryBean, $publisherBean]);
 
+    $publisher->records[] = $record;
+
     return $record;
   }
 
